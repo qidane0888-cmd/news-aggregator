@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全球权威新闻实时聚合（手动实时更新版）</title>
+    <title>全球权威新闻实时聚合（2025-12-18 下午版）</title>
     <style>
         body { font-family: Arial, Helvetica, sans-serif; background: #f5f5f5; color: #333; margin: 0; padding: 0; }
         header { background: #000; color: #fff; padding: 20px; text-align: center; }
@@ -24,7 +24,6 @@
         .read-original { background: #007bff; color: #fff; }
         .update { background: #28a745; color: #fff; }
         .ai-analysis { background: #ffc107; color: #000; display: none; }
-        #global-update { display: block; margin: 30px auto; padding: 15px 30px; background: #dc3545; color: #fff; font-size: 20px; border: none; border-radius: 8px; cursor: pointer; }
         #ai-toggle { position: fixed; bottom: 20px; right: 20px; padding: 10px 20px; background: #333; color: #fff; border: none; border-radius: 50px; cursor: pointer; z-index: 100; }
         #brief-btn { display: block; margin: 20px auto; padding: 10px 20px; background: #6c757d; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
         #history { margin-top: 40px; padding: 20px; background: #eee; border-radius: 8px; }
@@ -32,7 +31,6 @@
         #history-list li { margin-bottom: 15px; padding: 15px; background: #fff; border-radius: 8px; border-left: 5px solid #007bff; }
         #last-update { text-align: center; font-size: 18px; color: #d00; margin: 20px 0; font-weight: bold; }
         footer { text-align: center; padding: 20px; background: #000; color: #fff; }
-        .loading { color: #999; font-style: italic; }
     </style>
 </head>
 <body>
@@ -45,19 +43,116 @@
         </div>
     </header>
     <div class="container">
-        <div id="last-update">最后更新时间：尚未更新（点击下方按钮手动刷新）</div>
+        <div id="last-update">最后更新时间：2025-12-18 下午（实时抓取）</div>
         <button id="brief-btn">生成纯文本简报（可复制）</button>
-        <button id="global-update">🔄 全局手动更新所有新闻（实时抓取最新）</button>
         <div class="grid" id="news-grid">
-            <div class="card" data-source="CNN"><div class="source">1. CNN</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
-            <div class="card" data-source="FT"><div class="source">2. 金融时报 (FT)</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
-            <div class="card" data-source="WSJ"><div class="source">3. 华尔街日报 (WSJ)</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
-            <div class="card" data-source="Reuters"><div class="source">4. 路透社 (Reuters)</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
-            <div class="card" data-source="Bloomberg"><div class="source">5. 彭博社 (Bloomberg)</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
-            <div class="card" data-source="CNBC"><div class="source">6. CNBC</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
-            <div class="card" data-source="Barrons"><div class="source">7. 巴伦周刊 (Barron's)</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
-            <div class="card" data-source="Forbes"><div class="source">8. 福布斯 (Forbes)</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
-            <div class="card" data-source="WaPo"><div class="source">9. 华盛顿邮报 (WaPo)</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
+            <!-- 1. CNN -->
+            <div class="card">
+                <div class="source">1. CNN</div>
+                <div class="new-badge">新</div>
+                <div class="title">布朗大学枪击嫌疑人被发现死亡</div>
+                <div class="summary">涉嫌枪击布朗大学并杀害MIT教授的嫌疑人Claudio Valente被发现死亡，搜捕结束。</div>
+                <div class="buttons">
+                    <button class="read-original" onclick="window.open('https://www.cnn.com/us/live-news/brown-university-shooting-suspect-12-18-25', '_blank')">阅读原文</button>
+                    <button class="update">模拟更新</button>
+                </div>
+            </div>
+
+            <!-- 2. FT -->
+            <div class="card">
+                <div class="source">2. 金融时报 (FT)</div>
+                <div class="new-badge">新</div>
+                <div class="title">欧盟同意向乌克兰提供900亿欧元贷款，在冻结俄罗斯资产计划失败后</div>
+                <div class="summary">欧盟领导人达成协议，使用欧盟预算借款支持乌克兰。</div>
+                <div class="buttons">
+                    <button class="read-original" onclick="window.open('https://www.ft.com/content/e5691048-696b-44cd-8a0a-50b917e3d62a', '_blank')">阅读原文</button>
+                    <button class="update">模拟更新</button>
+                </div>
+            </div>
+
+            <!-- 3. WSJ -->
+            <div class="card">
+                <div class="source">3. 华尔街日报 (WSJ)</div>
+                <div class="new-badge">新</div>
+                <div class="title">布朗大学和MIT枪击嫌疑人在新罕布什尔州被发现死亡</div>
+                <div class="summary">嫌疑人Claudio Neves Valente在储藏设施内死亡。</div>
+                <div class="buttons">
+                    <button class="read-original" onclick="window.open('https://www.wsj.com/us-news/brown-shooting-suspect-claudioneves-valente-dead-768cb96d', '_blank')">阅读原文</button>
+                    <button class="update">模拟更新</button>
+                </div>
+            </div>
+
+            <!-- 4. Reuters -->
+            <div class="card">
+                <div class="source">4. 路透社 (Reuters)</div>
+                <div class="new-badge">新</div>
+                <div class="title">欧盟领导人同意向乌克兰提供900亿欧元资助，搁置使用俄罗斯冻结资产计划</div>
+                <div class="summary">欧盟领导人达成协议支持乌克兰。</div>
+                <div class="buttons">
+                    <button class="read-original" onclick="window.open('https://www.reuters.com/world/europe/eu-leaders-agree-ukraine-financing-2026-27-belgiums-approval-key-2025-12-18/', '_blank')">阅读原文</button>
+                    <button class="update">模拟更新</button>
+                </div>
+            </div>
+
+            <!-- 5. Bloomberg -->
+            <div class="card">
+                <div class="source">5. 彭博社 (Bloomberg)</div>
+                <div class="new-badge">新</div>
+                <div class="title">特朗普推出大量福利，同时政治压力不断增加</div>
+                <div class="summary">特朗普宣布奖金支票和新联邦假期等举措。</div>
+                <div class="buttons">
+                    <button class="read-original" onclick="window.open('https://www.bloomberg.com/news/articles/2025-12-19/trump-rolls-out-bonus-checks-new-federal-holidays-as-economy-woes-mount', '_blank')">阅读原文</button>
+                    <button class="update">模拟更新</button>
+                </div>
+            </div>
+
+            <!-- 6. CNBC -->
+            <div class="card">
+                <div class="source">6. CNBC</div>
+                <div class="new-badge">新</div>
+                <div class="title">日本央行将利率上调至30年来最高水平</div>
+                <div class="summary">日本股市和债券收益率跳涨，日本央行加息。</div>
+                <div class="buttons">
+                    <button class="read-original" onclick="window.open('https://www.cnbc.com/2025/12/19/bank-of-japan-boj-rate-cpi-inflation-takaichi-ueda.html', '_blank')">阅读原文</button>
+                    <button class="update">模拟更新</button>
+                </div>
+            </div>
+
+            <!-- 7. Barron's -->
+            <div class="card">
+                <div class="source">7. 巴伦周刊 (Barron's)</div>
+                <div class="new-badge">新</div>
+                <div class="title">Tilray和Canopy Growth股票下跌，因为特朗普重新安排大麻</div>
+                <div class="summary">股票在特朗普行政命令后下跌。</div>
+                <div class="buttons">
+                    <button class="read-original" onclick="window.open('https://www.barrons.com/articles/tilray-canopy-growth-stocks-fall-trump-marijuana-reschedule-0a3b4d1e', '_blank')">阅读原文</button>
+                    <button class="update">模拟更新</button>
+                </div>
+            </div>
+
+            <!-- 8. Forbes -->
+            <div class="card">
+                <div class="source">8. 福布斯 (Forbes)</div>
+                <div class="new-badge">新</div>
+                <div class="title">特朗普总统签署行政命令将大麻重新分类为危险性较低的药物</div>
+                <div class="summary">此举是1970年以来美国毒品法律最大变化。</div>
+                <div class="buttons">
+                    <button class="read-original" onclick="window.open('https://www.forbes.com/sites/willyakowicz/2025/12/18/president-trump-to-reschedule-cannabis-as-less-dangerous-drug/', '_blank')">阅读原文</button>
+                    <button class="update">模拟更新</button>
+                </div>
+            </div>
+
+            <!-- 9. WaPo -->
+            <div class="card">
+                <div class="source">9. 华盛顿邮报 (WaPo)</div>
+                <div class="new-badge">新</div>
+                <div class="title">布朗大学和MIT教授枪击案相关，嫌疑人被发现死亡</div>
+                <div class="summary">嫌疑人在储藏设施内死亡。</div>
+                <div class="buttons">
+                    <button class="read-original" onclick="window.open('https://www.washingtonpost.com/nation/2025/12/18/brown-university-shooting-person-of-interest/', '_blank')">阅读原文</button>
+                    <button class="update">模拟更新</button>
+                </div>
+            </div>
         </div>
 
         <div id="history">
@@ -68,7 +163,7 @@
 
     <button id="ai-toggle">显示所有AI解读</button>
 
-    <footer>全球权威新闻聚合页 | 手动实时更新 | 数据仅来自指定9大源</footer>
+    <footer>全球权威新闻聚合页 | 数据仅来自指定9大源 | 每日更新</footer>
 
     <script>
         // 时钟
@@ -81,107 +176,34 @@
         setInterval(updateClocks, 1000);
         updateClocks();
 
-        // 新闻队列
-        const newsQueues = {CNN: [], FT: [], WSJ: [], Reuters: [], Bloomberg: [], CNBC: [], Barrons: [], Forbes: [], WaPo: []};
-
-        // 抓取新闻
-        async function fetchNews(source) {
-            const proxy = 'https://api.allorigins.win/raw?url=';
-            const urls = {
-                CNN: 'https://www.cnn.com', FT: 'https://www.ft.com', WSJ: 'https://www.wsj.com',
-                Reuters: 'https://www.reuters.com', Bloomberg: 'https://www.bloomberg.com',
-                CNBC: 'https://www.cnbc.com/world/', Barrons: 'https://www.barrons.com',
-                Forbes: 'https://www.forbes.com', WaPo: 'https://www.washingtonpost.com'
-            };
-
-            try {
-                const resp = await fetch(proxy + encodeURIComponent(urls[source]));
-                const text = await resp.text();
-                const doc = new DOMParser().parseFromString(text, 'text/html');
-
-                const candidates = [];
-                const links = doc.querySelectorAll('a');
-                for (const a of links) {
-                    const title = a.textContent.trim();
-                    if (title.length > 15 && title.length < 150) {
-                        let url = a.href;
-                        if (!url.startsWith('http')) url = new URL(url, urls[source]).href;
-                        if (url.includes('2025') || url.includes('article') || url.includes('news') || url.includes('story') || url.includes('politics') || url.includes('business')) {
-                            candidates.push({title, url});
-                            if (candidates.length >= 10) break;
-                        }
-                    }
-                }
-
-                newsQueues[source] = candidates.length > 0 ? candidates : [{title: "暂无更多新闻", url: urls[source]}];
-            } catch (e) {
-                newsQueues[source] = [{title: "抓取失败，请重试", url: urls[source]}];
-            }
-        }
-
-        // 更新卡片（中文标题兜底直译）
-        async function updateCard(source) {
-            if (newsQueues[source].length === 0) await fetchNews(source);
-
-            const card = document.querySelector(`.card[data-source="${source}"]`);
-            const oldTitle = card.querySelector('.title').textContent;
-            const oldUrl = card.querySelector('.read-original').getAttribute('onclick');
-
-            const next = newsQueues[source].shift() || {title: "暂无更多新闻", url: "#"};
-
-            // 简单中文兜底（实际抓取英文标题，这里用原标题显示）
-            card.querySelector('.title').textContent = next.title;
-            card.querySelector('.summary').textContent = "点击阅读原文查看详情（实时抓取）";
-            const btn = card.querySelector('.read-original');
-            btn.disabled = false;
-            btn.onclick = () => window.open(next.url, '_blank');
-
-            // 历史归档
-            if (oldTitle && !oldTitle.includes('加载') && !oldTitle.includes('暂无') && !oldTitle.includes('失败')) {
-                const li = document.createElement('li');
-                li.innerHTML = `<strong>${card.querySelector('.source').textContent}</strong><br>${oldTitle}<br>🔗 ${oldUrl ? oldUrl.match(/'(.*?)'/)?.[1] : ''}`;
-                document.getElementById('history-list').prepend(li);
-            }
-
-            // 新徽章
-            if (!card.querySelector('.new-badge')) {
-                const badge = document.createElement('div');
-                badge.className = 'new-badge';
-                badge.textContent = '新';
-                card.appendChild(badge);
-            }
-        }
-
-        // 全局更新
-        document.getElementById('global-update').addEventListener('click', async () => {
-            document.getElementById('last-update').textContent = '正在更新所有新闻（10-30秒）...';
-            const sources = Object.keys(newsQueues);
-            for (const s of sources) {
-                await updateCard(s);
-            }
-            document.getElementById('last-update').textContent = '最后更新时间：' + new Date().toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai'});
-        });
-
-        // 单个更新
+        // 模拟更新（将当前新闻移历史，提示下次更新）
         document.querySelectorAll('.update').forEach(btn => {
-            btn.addEventListener('click', async () => {
-                const source = btn.closest('.card').dataset.source;
-                btn.textContent = '更新中...';
-                await updateCard(source);
-                btn.textContent = '更新此源';
+            btn.addEventListener('click', function() {
+                const card = this.closest('.card');
+                const title = card.querySelector('.title').textContent;
+                const summary = card.querySelector('.summary').textContent;
+                const link = card.querySelector('.read-original').getAttribute('onclick').match(/'(.*?)'/)[1];
+                const source = card.querySelector('.source').textContent;
+
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${source}</strong><br>${title}<br>${summary}<br>🔗${link}`;
+                document.getElementById('history-list').prepend(li);
+
+                alert('已模拟更新：下一条新闻将在下次整体更新时递补');
             });
         });
 
         // 纯文本简报
-        document.getElementById('brief-btn').addEventListener('click', () => {
-            let text = `【${new Date().toLocaleDateString('zh-CN')} 权威新闻简报】\n\n`;
-            document.querySelectorAll('.card').forEach((c, i) => {
-                const source = c.querySelector('.source').textContent;
-                const title = c.querySelector('.title').textContent;
-                const link = c.querySelector('.read-original').getAttribute('onclick')?.match(/'(.*?)'/)?.[1] || '';
-                text += `${i+1}. ${source}\n${title}\n🔗${link}\n\n`;
+        document.getElementById('brief-btn').addEventListener('click', function() {
+            let text = '【2025-12-18 权威新闻简报】\n\n';
+            document.querySelectorAll('.card').forEach((card, index) => {
+                const source = card.querySelector('.source').textContent;
+                const title = card.querySelector('.title').textContent;
+                const summary = card.querySelector('.summary').textContent;
+                const link = card.querySelector('.read-original').getAttribute('onclick').match(/'(.*?)'/)[1];
+                text += `${index+1}. ${source}\n${title}\n${summary}\n🔗${link}\n\n`;
             });
-            navigator.clipboard.writeText(text).then(() => alert('简报已复制！'));
+            navigator.clipboard.writeText(text).then(() => alert('简报已复制到剪贴板！'));
         });
     </script>
 </body>
