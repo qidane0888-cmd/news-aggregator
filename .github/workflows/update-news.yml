@@ -24,7 +24,7 @@ jobs:
 
       - name: Run update script
         run: python update_script.py
-        working-directory: news-aggregator  # ← 仓库名正好匹配子目录
+        # 删掉 working-directory
 
       - name: Commit and push if changed
         run: |
@@ -33,4 +33,4 @@ jobs:
           git add index.html
           git commit -m "Auto update news $(date +'%Y-%m-%d %H:%M')" || exit 0
           git push
-        working-directory: news-aggregator
+        # 删掉 working-directory
