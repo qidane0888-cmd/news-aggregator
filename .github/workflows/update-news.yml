@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: .  # ← 关键：强制克隆到根目录，避免嵌套
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -24,7 +26,6 @@ jobs:
 
       - name: Run update script
         run: python update_script.py
-        # 删掉 working-directory
 
       - name: Commit and push if changed
         run: |
@@ -33,4 +34,3 @@ jobs:
           git add index.html
           git commit -m "Auto update news $(date +'%Y-%m-%d %H:%M')" || exit 0
           git push
-        # 删掉 working-directory
