@@ -2,7 +2,7 @@ name: Daily News Update
 
 on:
   schedule:
-    - cron: '0 1 * * *'  # 北京时间早上9点 (UTC+8 所以UTC 1:00)
+    - cron: '0 1 * * *'  # 北京时间早上9点 (UTC 1:00)
     - cron: '0 8 * * *'  # 北京时间下午4点 (UTC 8:00)
   workflow_dispatch:  # 允许手动触发
 
@@ -24,6 +24,7 @@ jobs:
 
       - name: Run update script
         run: python update_script.py
+        working-directory: news-aggregator  # ← 这行是关键修复！
 
       - name: Commit and push if changed
         run: |
@@ -32,3 +33,4 @@ jobs:
           git add index.html
           git commit -m "Auto update news $(date +'%Y-%m-%d %H:%M')" || exit 0
           git push
+        working-directory: news-aggregator  # ← 这行也加上保险
