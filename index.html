@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>全球权威新闻实时聚合（手动更新版）</title>
+    <title>全球权威新闻实时聚合（手动实时更新版）</title>
     <style>
         body { font-family: Arial, Helvetica, sans-serif; background: #f5f5f5; color: #333; margin: 0; padding: 0; }
         header { background: #000; color: #fff; padding: 20px; text-align: center; }
@@ -29,10 +29,10 @@
         #brief-btn { display: block; margin: 20px auto; padding: 10px 20px; background: #6c757d; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
         #history { margin-top: 40px; padding: 20px; background: #eee; border-radius: 8px; }
         #history-list { list-style: none; padding: 0; }
-        #history-list li { margin-bottom: 10px; padding: 15px; background: #fff; border-radius: 8px; border-left: 4px solid #007bff; }
+        #history-list li { margin-bottom: 15px; padding: 15px; background: #fff; border-radius: 8px; border-left: 5px solid #007bff; }
         #last-update { text-align: center; font-size: 18px; color: #d00; margin: 20px 0; font-weight: bold; }
-        footer { text-align: center; padding: 20px; background: #000; color: #fff; margin-top: 50px; }
-        .loading { color: #666; font-style: italic; }
+        footer { text-align: center; padding: 20px; background: #000; color: #fff; }
+        .loading { color: #999; font-style: italic; }
     </style>
 </head>
 <body>
@@ -47,92 +47,18 @@
     <div class="container">
         <div id="last-update">最后更新时间：尚未更新（点击下方按钮手动刷新）</div>
         <button id="brief-btn">生成纯文本简报（可复制）</button>
-        <button id="global-update">🔄 全局手动更新所有新闻（实时抓取最新头条）</button>
+        <button id="global-update">🔄 全局手动更新所有新闻（实时抓取最新）</button>
         <div class="grid" id="news-grid">
-            <!-- 初始9个卡片（占位，首次点击全局更新后会被替换） -->
-            <div class="card" data-source="CNN">
-                <div class="source">1. CNN</div>
-                <div class="title loading">点击“全局手动更新”加载最新新闻</div>
-                <div class="summary loading">支持单独更新和队列递补</div>
-                <div class="buttons">
-                    <button class="read-original" disabled>阅读原文</button>
-                    <button class="update">更新此源</button>
-                </div>
-            </div>
-            <!-- 其他8个类似，略写以节省空间 -->
-            <div class="card" data-source="FT">
-                <div class="source">2. 金融时报 (FT)</div>
-                <div class="title loading">点击“全局手动更新”加载最新新闻</div>
-                <div class="summary loading">支持单独更新和队列递补</div>
-                <div class="buttons">
-                    <button class="read-original" disabled>阅读原文</button>
-                    <button class="update">更新此源</button>
-                </div>
-            </div>
-            <!-- 重复结构 for WSJ, Reuters, Bloomberg, CNBC, Barrons, Forbes, WaPo -->
-            <div class="card" data-source="WSJ">
-                <div class="source">3. 华尔街日报 (WSJ)</div>
-                <div class="title loading">点击“全局手动更新”加载最新新闻</div>
-                <div class="summary loading">支持单独更新和队列递补</div>
-                <div class="buttons">
-                    <button class="read-original" disabled>阅读原文</button>
-                    <button class="update">更新此源</button>
-                </div>
-            </div>
-            <div class="card" data-source="Reuters">
-                <div class="source">4. 路透社 (Reuters)</div>
-                <div class="title loading">点击“全局手动更新”加载最新新闻</div>
-                <div class="summary loading">支持单独更新和队列递补</div>
-                <div class="buttons">
-                    <button class="read-original" disabled>阅读原文</button>
-                    <button class="update">更新此源</button>
-                </div>
-            </div>
-            <div class="card" data-source="Bloomberg">
-                <div class="source">5. 彭博社 (Bloomberg)</div>
-                <div class="title loading">点击“全局手动更新”加载最新新闻</div>
-                <div class="summary loading">支持单独更新和队列递补</div>
-                <div class="buttons">
-                    <button class="read-original" disabled>阅读原文</button>
-                    <button class="update">更新此源</button>
-                </div>
-            </div>
-            <div class="card" data-source="CNBC">
-                <div class="source">6. CNBC</div>
-                <div class="title loading">点击“全局手动更新”加载最新新闻</div>
-                <div class="summary loading">支持单独更新和队列递补</div>
-                <div class="buttons">
-                    <button class="read-original" disabled>阅读原文</button>
-                    <button class="update">更新此源</button>
-                </div>
-            </div>
-            <div class="card" data-source="Barrons">
-                <div class="source">7. 巴伦周刊 (Barron's)</div>
-                <div class="title loading">点击“全局手动更新”加载最新新闻</div>
-                <div class="summary loading">支持单独更新和队列递补</div>
-                <div class="buttons">
-                    <button class="read-original" disabled>阅读原文</button>
-                    <button class="update">更新此源</button>
-                </div>
-            </div>
-            <div class="card" data-source="Forbes">
-                <div class="source">8. 福布斯 (Forbes)</div>
-                <div class="title loading">点击“全局手动更新”加载最新新闻</div>
-                <div class="summary loading">支持单独更新和队列递补</div>
-                <div class="buttons">
-                    <button class="read-original" disabled>阅读原文</button>
-                    <button class="update">更新此源</button>
-                </div>
-            </div>
-            <div class="card" data-source="WaPo">
-                <div class="source">9. 华盛顿邮报 (WaPo)</div>
-                <div class="title loading">点击“全局手动更新”加载最新新闻</div>
-                <div class="summary loading">支持单独更新和队列递补</div>
-                <div class="buttons">
-                    <button class="read-original" disabled>阅读原文</button>
-                    <button class="update">更新此源</button>
-                </div>
-            </div>
+            <!-- 9个卡片模板 -->
+            <div class="card" data-source="CNN"><div class="source">1. CNN</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
+            <div class="card" data-source="FT"><div class="source">2. 金融时报 (FT)</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
+            <div class="card" data-source="WSJ"><div class="source">3. 华尔街日报 (WSJ)</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
+            <div class="card" data-source="Reuters"><div class="source">4. 路透社 (Reuters)</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
+            <div class="card" data-source="Bloomberg"><div class="source">5. 彭博社 (Bloomberg)</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
+            <div class="card" data-source="CNBC"><div class="source">6. CNBC</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
+            <div class="card" data-source="Barrons"><div class="source">7. 巴伦周刊 (Barron's)</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
+            <div class="card" data-source="Forbes"><div class="source">8. 福布斯 (Forbes)</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
+            <div class="card" data-source="WaPo"><div class="source">9. 华盛顿邮报 (WaPo)</div><div class="title loading">点击全局更新加载新闻</div><div class="summary loading">支持队列递补和历史归档</div><div class="buttons"><button class="read-original" disabled>阅读原文</button><button class="update">更新此源</button></div></div>
         </div>
 
         <div id="history">
@@ -146,7 +72,7 @@
     <footer>全球权威新闻聚合页 | 手动实时更新 | 数据仅来自指定9大源</footer>
 
     <script>
-        // 多时区时钟
+        // 时钟
         function updateClocks() {
             const now = new Date();
             document.getElementById('beijing').textContent = now.toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai'});
@@ -156,77 +82,68 @@
         setInterval(updateClocks, 1000);
         updateClocks();
 
-        // 每个新闻源的抓取队列（每次更新从队列头部取下一条）
+        // 新闻队列（每个源独立）
         const newsQueues = {
-            CNN: [],
-            FT: [],
-            WSJ: [],
-            Reuters: [],
-            Bloomberg: [],
-            CNBC: [],
-            Barrons: [],
-            Forbes: [],
-            WaPo: []
+            CNN: [], FT: [], WSJ: [], Reuters: [], Bloomberg: [], CNBC: [], Barrons: [], Forbes: [], WaPo: []
         };
 
-        // 抓取函数（使用CORS代理避免跨域问题）
+        // 实时抓取函数（使用免费CORS代理）
         async function fetchNews(source) {
             const proxy = 'https://api.allorigins.win/raw?url=';
             const urls = {
-                CNN: 'https://www.cnn.com',
-                FT: 'https://www.ft.com',
-                WSJ: 'https://www.wsj.com',
-                Reuters: 'https://www.reuters.com',
-                Bloomberg: 'https://www.bloomberg.com',
-                CNBC: 'https://www.cnbc.com/world/',
-                Barrons: 'https://www.barrons.com',
-                Forbes: 'https://www.forbes.com',
-                WaPo: 'https://www.washingtonpost.com'
+                CNN: 'https://www.cnn.com', FT: 'https://www.ft.com', WSJ: 'https://www.wsj.com',
+                Reuters: 'https://www.reuters.com', Bloomberg: 'https://www.bloomberg.com',
+                CNBC: 'https://www.cnbc.com/world/', Barrons: 'https://www.barrons.com',
+                Forbes: 'https://www.forbes.com', WaPo: 'https://www.washingtonpost.com'
             };
 
             try {
-                const response = await fetch(proxy + encodeURIComponent(urls[source]));
-                const text = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(text, 'text/html');
+                const resp = await fetch(proxy + encodeURIComponent(urls[source]));
+                const text = await resp.text();
+                const doc = new DOMParser().parseFromString(text, 'text/html');
 
-                // 简单提取前5条显眼标题和链接（根据各站结构调整）
-                const links = Array.from(doc.querySelectorAll('a[href]')).filter(a => a.href && a.textContent.trim().length > 10 && a.textContent.trim().length < 200);
-                const candidates = links.slice(0, 10).map(a => ({
-                    title: a.textContent.trim(),
-                    url: a.href.startsWith('http') ? a.href : new URL(a.href, urls[source]).href
-                }));
+                // 更精准提取（过滤广告、导航，选长标题的新闻链接）
+                const candidates = Array.from(doc.querySelectorAll('a'))
+                    .filter(a => {
+                        const text = a.textContent.trim();
+                        const href = a.href;
+                        return text.length > 15 && text.length < 150 && href && href.includes('2025') || href.includes('article');
+                    })
+                    .slice(0, 15)
+                    .map(a => ({
+                        title: a.textContent.trim(),
+                        url: a.href.startsWith('http') ? a.href : new URL(a.href, urls[source]).href
+                    }));
 
-                newsQueues[source] = candidates.filter(c => c.title && c.url);
+                newsQueues[source] = candidates.length > 0 ? candidates : [{title: "暂无更多新闻", url: urls[source]}];
             } catch (e) {
-                newsQueues[source] = [{title: "抓取失败，请稍后重试", url: urls[source]}];
+                newsQueues[source] = [{title: "抓取失败（网络或网站限制）", url: urls[source]}];
             }
         }
 
         // 更新单个卡片
         async function updateCard(source) {
+            if (newsQueues[source].length === 0) await fetchNews(source);
+
             const card = document.querySelector(`.card[data-source="${source}"]`);
             const oldTitle = card.querySelector('.title').textContent;
-            const oldSummary = card.querySelector('.summary').textContent;
-            const oldUrl = card.querySelector('.read-original').getAttribute('onclick') || '';
-
-            if (newsQueues[source].length === 0) await fetchNews(source);
+            const oldUrl = card.querySelector('.read-original').getAttribute('onclick');
 
             const next = newsQueues[source].shift() || {title: "暂无更多新闻", url: "#"};
             card.querySelector('.title').textContent = next.title;
-            card.querySelector('.summary').textContent = "点击阅读原文查看详情";
-            const readBtn = card.querySelector('.read-original');
-            readBtn.disabled = false;
-            readBtn.onclick = () => window.open(next.url, '_blank');
+            card.querySelector('.summary').textContent = "点击阅读原文查看详情（实时抓取）";
+            const btn = card.querySelector('.read-original');
+            btn.disabled = false;
+            btn.onclick = () => window.open(next.url, '_blank');
 
-            // 旧新闻移入历史
-            if (oldTitle && !oldTitle.includes('加载') && !oldTitle.includes('暂无')) {
+            // 旧新闻归档
+            if (oldTitle && !oldTitle.includes('加载') && !oldTitle.includes('暂无') && !oldTitle.includes('失败')) {
                 const li = document.createElement('li');
-                li.innerHTML = `<strong>${card.querySelector('.source').textContent}</strong><br>${oldTitle}<br>${oldSummary}<br>🔗 ${oldUrl.match(/'(.*?)'/)?.[1] || ''}`;
+                li.innerHTML = `<strong>${card.querySelector('.source').textContent}</strong><br>${oldTitle}<br>🔗 ${oldUrl ? oldUrl.match(/'(.*?)'/)?.[1] : ''}`;
                 document.getElementById('history-list').prepend(li);
             }
 
-            // 如果是首次加载，加“新”徽章
+            // 加“新”徽章（首次）
             if (!card.querySelector('.new-badge')) {
                 const badge = document.createElement('div');
                 badge.className = 'new-badge';
@@ -235,21 +152,18 @@
             }
         }
 
-        // 全局更新所有
+        // 全局更新
         document.getElementById('global-update').addEventListener('click', async () => {
-            document.getElementById('last-update').textContent = '正在更新所有新闻，请稍等...';
+            document.getElementById('last-update').textContent = '正在更新所有新闻（约10-30秒）...';
             const sources = Object.keys(newsQueues);
-            for (const source of sources) {
-                await updateCard(source);
-            }
+            for (const s of sources) await updateCard(s);
             document.getElementById('last-update').textContent = '最后更新时间：' + new Date().toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai'});
         });
 
         // 单个更新
         document.querySelectorAll('.update').forEach(btn => {
             btn.addEventListener('click', async () => {
-                const card = btn.closest('.card');
-                const source = card.dataset.source;
+                const source = btn.closest('.card').dataset.source;
                 btn.textContent = '更新中...';
                 await updateCard(source);
                 btn.textContent = '更新此源';
@@ -259,16 +173,14 @@
         // 纯文本简报
         document.getElementById('brief-btn').addEventListener('click', () => {
             let text = `【${new Date().toLocaleDateString('zh-CN')} 权威新闻简报】\n\n`;
-            document.querySelectorAll('.card').forEach((card, i) => {
-                const source = card.querySelector('.source').textContent;
-                const title = card.querySelector('.title').textContent;
-                const link = card.querySelector('.read-original').getAttribute('onclick')?.match(/'(.*?)'/)?.[1] || '';
+            document.querySelectorAll('.card').forEach((c, i) => {
+                const source = c.querySelector('.source').textContent;
+                const title = c.querySelector('.title').textContent;
+                const link = c.querySelector('.read-original').getAttribute('onclick')?.match(/'(.*?)'/)?.[1] || '';
                 text += `${i+1}. ${source}\n${title}\n🔗${link}\n\n`;
             });
-            navigator.clipboard.writeText(text).then(() => alert('简报已复制到剪贴板！'));
+            navigator.clipboard.writeText(text).then(() => alert('简报已复制！'));
         });
-
-        // AI解读开关等其他功能同前
     </script>
 </body>
 </html>
