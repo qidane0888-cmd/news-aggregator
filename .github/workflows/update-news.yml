@@ -24,7 +24,7 @@ jobs:
 
       - name: Run update script
         run: python update_script.py
-        working-directory: news-aggregator  # ← 精确匹配克隆子目录
+        working-directory: news-aggregator  # ← 仓库名正好匹配子目录
 
       - name: Commit and push if changed
         run: |
